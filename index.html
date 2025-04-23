@@ -2,23 +2,22 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>What I Saw When I Woke Up</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 <body>
   <main>
-    <h1>What I Saw When I Woke Up</h1>
-    <h2>Notes from the First Wave - A Spiritual Trip Report by Tully Hoffmann</h2>
-    <article>
-      <!-- The memoir text will be dynamically inserted here -->
-      <!-- For simplicity in this prototype, only part of the content is included. Full version can be added later -->
-      <p><strong>Tully, You Are Really Suffering</strong></p>
-      <p>Sometimes, you gotta hit rock bottom to make a change...</p>
-      <p>[... content continues here in full document ...]</p>
-      <p><em>This is me. I was here. I was present. I tried.</em></p>
-    </article>
+    <div id="content">Loading...</div>
   </main>
+  <script>
+    fetch('memoir.md')
+      .then(response => response.text())
+      .then(text => {
+        document.getElementById('content').innerHTML = marked.parse(text);
+      });
+  </script>
 </body>
 </html>
