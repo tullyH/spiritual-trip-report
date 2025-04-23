@@ -1,0 +1,23 @@
+
+body {
+  font-family: Georgia, serif;
+  background-color: #f4f4f4;
+  color: #222;
+  line-height: 1.6;
+  padding: 20px;
+  max-width: 700px;
+  margin: auto;
+}
+h1, h2 {
+  text-align: center;
+  line-height: 1.2;
+}
+article p {
+  margin-bottom: 1.2em;
+}
+@media (max-width: 768px) {
+  body {
+    padding: 15px;
+    font-size: 1.1em;
+  }
+}
