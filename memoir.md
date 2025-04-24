@@ -363,6 +363,24 @@ Like, if I could become aware enough in the very moment of becoming aware…
 Maybe I could study that moment.
 Break it down.
 Maybe then I could find a way to access it again on demand.
+
+I did start noticing patterns.
+Social moments, for example, were some of the most difficult.
+Even when I was making a real effort to stay aware, it just didn’t happen.
+I’d be trying to stay grounded, but the presence wouldn’t come.
+It was like the signal couldn’t get through all the noise.
+But then, sometimes—later—on the walk home, something would open.
+Subtle, but clear.
+Like awareness had been waiting in the background, and now it stepped forward.
+It was almost like these states were a side effect of my conscious efforts.
+And then there were those moments that felt almost poetic.
+Like I would suddenly feel the absurdity of it all—
+how deep into distraction or unconsciousness I could go before noticing I was gone.
+And that very realization would snap me back.
+Like: Wait. I exist.
+I’m right here.
+How did I not notice that before?
+
 But it was an endless chase.
 Because even when those moments did come, they were so overwhelming—in a good way—that it became hard to stay present inside them.
 You’d get swept away by the beauty. By the ecstasy.
