@@ -208,6 +208,7 @@ But chasing the rush doesn't really lead you back.
 
 
 ## Intense Moments of Presence
+
 One of the most intense moments of presence I ever had was while cleaning my room.
 There’s something I always liked about cleaning.
 When your mind gets more organized, you want your space to match.
@@ -474,6 +475,58 @@ You let go of the thought, because you know—it’s just a little trigger.
 And you bring your attention back to the here and now.
 You remember that you’re alive. That you exist.
 
+## How Far Are You Willing to Go?
+
+I’m not saying there’s only one way to reach those states.
+Sometimes they just hit you — you’re walking, journaling, zoning out — and out of nowhere you wake up for a second.
+Those rare flashes where everything feels still, real, undeniable.
+
+Most people only have a few of those in their lifetime.
+A few moments that stay with you —
+
+like bookmarks you didn’t mean to place, but never lost.
+
+But if we’re talking about those kinds of states — the ones that shift your whole perception —
+Then the real question becomes:
+
+How far are you willing to go?
+How much are you willing to give?
+
+For me, I treated it like a full-time job.
+Not an idea — a practice.
+Constantly checking where my attention was.
+
+And that’s when the mind starts pulling its tricks.
+Whispering:
+
+“You’re almost there.”
+“Just get up from bed and sit on the couch first.”
+“Just make your coffee first.”
+
+But that’s exactly the dream.
+Presence isn’t later.
+It’s right now.
+
+Even walking to the fridge — that’s it.
+Feeling the floor under your feet.
+Hearing the hum in the background.
+
+It’s not that the stories and thoughts disappear — they’re still there —
+But your priority flips.
+Raw experience becomes the main thing.
+
+And to live like that, you have to surrender.
+
+Not give up on life —
+but give up trying to micromanage it all.
+
+And yeah, it can feel terrifying at first —
+Like if you let go, you’ll crash.
+
+But you don’t.
+
+You land deeper into life than you ever thought you could.
+
 
 ## How Far Am I from Enlightenment?
 
@@ -553,6 +606,7 @@ And no matter how strong or insightful the trip was, it didn’t necessarily bri
 
 
 ## The Inner Compass
+
 One of the things that developed in me during that time was kind of an inner compass—an awareness tracker.
 Think of it as a new manager in charge, not quite the boss but manages the system, whose job was to notice when I was drifting.
 His job was basically to wake me up.
@@ -577,6 +631,26 @@ It’s kind of scary.
 Because once you start seeing how your mind works, you also see how easily it can trick you.
 You can forget.
 You can lose your way.
+Another trick the mind pulled on me came during a high moment — not low.
+I was walking, feeling present, seeing people almost like actors moving through a dream —
+and suddenly the mind threw this thought:
+“What if you’re supposed to wake everyone up?”
+And it didn’t feel crazy.
+It felt peaceful. Almost obvious.
+Not like some dramatic “I’m the chosen one” thing.
+Just a quiet little spin:
+“Maybe you’re the one who’s supposed to help people remember.”
+Then a different voice in me fought back:
+“Okay, fine. Let’s say it’s true.
+I wake everyone up. I do the job.
+Then what?
+I come home. I sit down.
+Am I present right now, or not?”
+And that was the real break.
+It wasn’t about the story.
+It wasn’t about a mission.
+It was about presence.
+The mind will do anything to keep the dream spinning.
 Some people say you should do this kind of work in a group, or with a teacher—because the mind is just too sneaky to handle alone.
 Later, I did join some groups.
 Spiritual groups. Meditation groups. A Gurdjieff group.
