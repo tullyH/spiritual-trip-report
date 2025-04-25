@@ -1,11 +1,7 @@
 # What I Saw When I Woke Up: Notes from the First Wave - A Spiritual Trip Report by Tully Hoffmann
 
 
-
-
-
 ## Tully, You Are Really Suffering
-
 
 Sometimes, you gotta hit rock bottom to make a change.
 In February 2019, I quit my job in tech. I was working as a software engineer, but I was deep in a weed addiction—and that was a big part of why I left. I had some money saved, and honestly, I’d just had enough of life. I wasn’t suicidal—I just wanted to numb out. To smoke, to scroll, to watch myself disappear.
@@ -28,10 +24,7 @@ Since that day, we’ve been doing spiritual sessions together—once a month, f
 That moment lifted so much weight off me. It made me feel better. I started actually enjoying my time in Canada with my family. And I decided: when I get back to Israel, I’m gonna try. I’m gonna eat healthy. Cut back on weed—maybe quit. Work out. Maybe even consider going back to tech.
 
 
-
-
 ## Back To Israel
-
 
 One word that struck me during that trip to Canada was “Presence.”
 “Being present.”
@@ -40,7 +33,7 @@ There was something very slow-motion and correct about what she was saying. It r
 Something about it sounded weird—like, what does being present even mean?
 Of course I’m present. Duh.
 But part of me was curious. I knew there was something they were pointing at…
-Back in Israel, right after I came back, I started making changes. My uncle helped me build a daily routine: eating healthy, working out, journaling, all that.
+Back in Israel, right after I came back, I started making changes. My uncle helped me build a daily routine: eating healthy, working out, journaling, that.
 I cut down on weed—decided I’d only smoke in the evenings. I started exercising and looking for ways to be productive. To feel alive.
 It was working. I felt like a new person. New energy.
 And the idea of being present? It started taking up more space in the back of my mind. I didn’t fully realize it yet, but I was becoming way more present in my life. I was starting to feel good. To feel healthy.
@@ -49,11 +42,7 @@ I knew something was cooking in me.
 Within two weeks, I quit weed completely.
 
 
-
-
-
 ## The Full-Time Job of Being Here
-
 
 One day, I was talking to a friend about all this, and he said, “If you’re into presence, read The Power of Now.”
 So I bought the book. And it changed everything.
@@ -91,11 +80,7 @@ This was psychological. This was self-help.
 I was living an active, healthy life. I wasn’t ready to go back to work, but I was socially active, doing stuff, challenging myself, trying to grow—not just to chase enlightenment, but to improve.
 
 
-
-
-
 ## The First Breakthrough
-
 
 I think the first breakthrough happened while journaling.
 One time, I was sitting down, just trying to spill—writing every thought, every judgment that came into my mind. I wanted to go as deep as possible. Even the thought of having a thought. The thoughts about writing every thought. The judgment of what am I even doing and will this work?
@@ -136,11 +121,7 @@ In that moment, I knew I was experiencing something big.
 That’s what Tolle was talking about.
 
 
-
-
-
 ## The New Tully
-
 
 I was a man on a mission: be present in every moment.
 Wake up? Be present.
@@ -201,11 +182,7 @@ Like tapping into a completely different reality.
 Like the shift from dreaming to being awake.
 
 
-
-
-
 ## Restaurant Comes Alive
-
 
 Another time—I was sitting in a crowded restaurant with friends.
 The place was noisy, full of people.
@@ -230,12 +207,7 @@ They can definitely become another kind of adrenaline rush.
 But chasing the rush doesn't really lead you back.
 
 
-
-
-
 ## Intense Moments of Presence
-
-
 One of the most intense moments of presence I ever had was while cleaning my room.
 There’s something I always liked about cleaning.
 When your mind gets more organized, you want your space to match.
@@ -250,6 +222,34 @@ Like just the fact that I exist.
 That existence exists.
 That was enough to make me want to fall to my knees.
 To scream and cry out of pure love, ecstasy, and gratitude.
+
+One time I was washing dishes, just trying to be present.
+The repetitive movement helped—it put my mind into a rhythm.
+
+Music was playing.
+
+And then it hit.
+I became present.
+
+And suddenly the music felt insanely emotional—beautiful to the point of tears.
+I could hear every instrument separately, and together.
+The space between them. The movement of the chords.
+
+My relative pitch felt way sharper.
+
+And then I had this realization—what an extreme shift in perception presence can bring.
+
+Because all of it—the harmony, the richness, the structure—was always there.
+But with all the mind noise, it usually feels distant. Like something you have to reach for.
+
+But it’s not.
+
+I wasn’t discovering some higher dimension. It was just this world—the real one—finally clear.
+
+And the feeling was so strong, so alive, that I almost paused the music right there—
+just to go outside and announce to the world what I’d just seen.
+
+
 And it didn’t only happen in poetic or peaceful moments.
 One time, I was in the middle of a migraine—something that usually knocks me out completely. 
 But suddenly, while the pain was still there, something deeper opened up.
@@ -275,11 +275,7 @@ Sometimes I’d laugh because it felt like the universe was playing a joke on us
 Like it had paused itself and said, “Let’s see if anyone notices how weird and wonderful this all is.”
 
 
-
-
-
 ## A Street Walker’s Trip Report
-
 
 One moment I remember: I was walking for maybe an hour, trying to be present.
 Doing the whole shtick.
@@ -330,6 +326,22 @@ It felt like everyone was already enlightened—they just didn’t know it.
 Like, people were playing their roles with so much swag, so much beauty.
 Maybe they’re not aware of it.
 But they are it.
+
+Sometimes it felt like some mysterious alien just came up, tapped a few buttons on the back of my head —
+
+— and boom.
+
+The world cracked open. Everything was beautiful.
+
+I looked around, wondering,
+“Wait… were they seeing this all along?”
+
+He was already fading away, smiling.
+
+Maybe he whispered,
+
+“Don’t worry… just be here.”
+
 In those moments, social anxiety doesn’t exist.
 Because you see how everyone’s just stuck in their own loop.
 And it’s like becoming lucid in a dream—you start to act silly because you realize none of it matters.
@@ -348,11 +360,7 @@ You can see it generate a thought or two in their mind.
 Then they drift away again—off to the next thought, the next trigger.
 
 
-
-
-
 ## The Scientist and the Experiment
-
 
 I really felt like a scientist on a mission—trying to go deeper and deeper.
 Trying not to let my mind trick me.
@@ -363,6 +371,14 @@ Like, if I could become aware enough in the very moment of becoming aware…
 Maybe I could study that moment.
 Break it down.
 Maybe then I could find a way to access it again on demand.
+
+**I also started noticing that not all fantasies were the same. There were different modes.
+Some were negative—driven by rejection, pain, fear. Others were more seductive—visions of success, love, power.
+And each mode seemed to come with its own emotional fuel. Different moods triggered different tracks.
+
+At some point, I even started getting mechanical with it—like I could feel my body trying to create the right emotional charge to sustain a positive fantasy… while still trying to stay present.
+
+But it never really worked. It’s a weird trick the mind plays—like trying to eat cake and meditate at the same time.**
 
 I did start noticing patterns.
 Social moments, for example, were some of the most difficult.
@@ -459,11 +475,7 @@ And you bring your attention back to the here and now.
 You remember that you’re alive. That you exist.
 
 
-
-
-
 ## How Far Am I from Enlightenment?
-
 
 During those few months, to be honest, I really thought I was probably just weeks—or maybe months—away from becoming enlightened.
 What I understood that to mean was: being in that state all the time. Or most of the time.
@@ -513,7 +525,6 @@ And spacious.
 
 ## Psychedelics and Spiritual Content
 
-
 In the first few months of this journey, I wasn’t even trying to gain spiritual knowledge or consume spiritual content.
 I thought I had it figured out.
 Just: try to be present in every moment.
@@ -541,16 +552,17 @@ Am I actually present? Am I aware?
 And no matter how strong or insightful the trip was, it didn’t necessarily bring me closer to that.
 
 
-
-
-
 ## The Inner Compass
-
-
 One of the things that developed in me during that time was kind of an inner compass—an awareness tracker.
 Think of it as a new manager in charge, not quite the boss but manages the system, whose job was to notice when I was drifting.
 His job was basically to wake me up.
-This could actually be annoying and difficult sometimes, because once you’ve seen something, you can’t unsee it.
+
+But it wasn’t just an alarm clock. It was also like my body was constantly scanning the environment—using my level of sensory awareness and this subtle sense of inner quiet—to measure, at any given moment, how awake I was.
+Not just whether I was present or not, but how present. How much space there was in my mind.
+It wasn’t something I had to think about—it just happened. Like a system running in the background, checking: Where am I right now? How clear is this moment?
+
+
+This inner alarm clock could actually be annoying and difficult sometimes, because once you’ve seen something, you can’t unsee it.
 You start feeling like you’re asleep whenever you’re not “awake,” and that can become exhausting.
 This inner compass, this alarm clock, became a central part of my existence.
 Sometimes it felt like I was that guy at a webinar, trying so hard not to fall asleep—but I was just too tired.
@@ -574,11 +586,7 @@ They all felt too structured, too religious, too naive.
 But even so, they did help me—at least from the perspective of challenging myself and giving me more chances to practice being present during those meetings.
 
 
-
-
-
 ## Objective Truth
-
 
 Regarding questions of God or some objective understanding of the universe, afterlife, or whatever—
 I cannot say that I saw something objective and definitive in those moments.
@@ -649,11 +657,7 @@ The only thing that is really real is me—now—aware in this present moment be
 So it kind of settled that question of God in my mind, from that perspective.
 
 
-
-
-
 ## The Need to Share
-
 
 Back then, the need to share and show other people—like “yo, look what’s going on”—was very strong,
 but also frustrating, because my surroundings—friends, family, whatever—
@@ -688,11 +692,7 @@ Furthermore, I don’t know what further potential our mind has—probably much 
 Especially since Gurdjieff also talks about the fourth state: objective consciousness.
 
 
-
-
-
 ## Medication’s Role
-
 
 I don’t know how much the Zoloft played a part in this.
 I was on and off this drug until I decided to quit.
@@ -721,11 +721,7 @@ And looking forward to a potential chapter two, I’m not on anything right now.
 But I’m always open-minded to trying new stuff in the future if it feels right.
 
 
-
-
-
 ## The Fade, Back to Normal
-
 
 Eventually, they started to fade.
 But they didn’t disappear without leaving something behind.
@@ -794,11 +790,7 @@ on all my understandings, insights, and experiences in life up until now—
 maybe it might even be deeper than the first.
 
 
-
-
-
 ## A Flare In The Sky
-
 
 Am I crazy if I feel like I can be some kind of consciousness scientist—where I am both the scientist and the experiment?
 I don’t want to preach.
@@ -812,10 +804,6 @@ I was here.
 I was present.
 I tried.
 
-Now this might be my last and only time writing about this.
-I don’t know if I have the consistency, or what it takes.
-Sometimes I feel like I’m a new person every day—
-always observing, always trying to understand.
 I was thinking—maybe I’ll try to create some kind of memoir.
 Some witness to all my experience.
 Maybe a book one day.
