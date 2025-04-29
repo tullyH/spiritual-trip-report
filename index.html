@@ -9,49 +9,42 @@
   <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔆</text></svg>" />
 
-  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Markdown parser -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
-  <!-- language switch -->
   <div class="lang-container">
     <button id="heBtn" class="lang-switch active">עברית</button>
     <button id="enBtn" class="lang-switch">English</button>
   </div>
 
-  <!-- memoir content -->
   <main id="main" class="container" dir="rtl">
     <div id="content">טוען…</div>
   </main>
 
-  <!-- sticky contact pill -->
+  <!-- sticky contact button -->
   <a href="#contact" class="contact-btn" aria-label="Contact">✉️</a>
 
-  <!-- footer -->
   <footer id="contact">
     <div class="contact-info">
       <a href="https://www.instagram.com/tully_hoffmann" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/256px-Instagram_logo_2022.svg.png"
              alt="" class="icon" />Tully Instagram
       </a>
-      <a href="https://www.instagram.com/rawpresence" target="_blank">
+      <a href="https://www.instagram.com/rawpresence1" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/256px-Instagram_logo_2022.svg.png"
              alt="" class="icon" />Raw Presence Lab
       </a>
       <a href="mailto:tullyhoffmann@gmail.com">
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Email_icon_%282013-2018%29.svg/256px-Email_icon_%282013-2018%29.svg.png"
-             alt="" class="icon" />Email
+        ✉️ Email
       </a>
     </div>
-    <p class="copyright">© 2025 Tully Hoffmann. All rights reserved.</p>
+    <p class="copyright">© 2025 Tully Hoffmann — All rights reserved</p>
   </footer>
 
-  <!-- JS: language loader + scroll-progress -->
   <script>
+    /* -------- markdown loader -------- */
     const contentEl = document.getElementById('content');
     const mainEl    = document.getElementById('main');
     const heBtn     = document.getElementById('heBtn');
@@ -70,18 +63,27 @@
       heBtn.classList.toggle('active', lang === 'he');
       enBtn.classList.toggle('active', lang === 'en');
     }
-
     heBtn.addEventListener('click', () => loadLanguage('he'));
     enBtn.addEventListener('click', () => loadLanguage('en'));
-    loadLanguage('he'); // default
+    loadLanguage('he');
 
-    /* ---- tiny scroll-progress bar (optional) ---- */
+    /* -------- scroll progress bar -------- */
     const root = document.documentElement;
     window.addEventListener('scroll', () => {
       const h = document.documentElement.scrollHeight - innerHeight;
-      const scrolled = (scrollY / h) * 100;
-      root.style.setProperty('--scroll', `${scrolled}%`);
+      root.style.setProperty('--scroll', `${(scrollY / h) * 100}%`);
     });
+
+    /* -------- hide / reveal contact button -------- */
+    const contactBtn = document.querySelector('.contact-btn');
+    let lastPos = 0, timeout;
+    window.addEventListener('scroll', () => {
+      clearTimeout(timeout);
+      const cur = scrollY;
+      if (cur > lastPos + 10) contactBtn.classList.add('hide');     // scrolling down
+      lastPos = cur;
+      timeout = setTimeout(() => contactBtn.classList.remove('hide'), 150); // user stopped
+    }, { passive: true });
   </script>
 </body>
 </html>
