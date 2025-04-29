@@ -1,97 +1,70 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>מה שראיתי כשקמתי</title>
 
-  <!-- Built-in Favicon -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔆</text></svg>" />
+  <!-- Favicon -->
+  <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔆</text></svg>" />
 
+  <!-- Main stylesheet -->
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Markdown parser -->
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-
-  <style>
-    .lang-container {
-      display: flex;
-      justify-content: center;
-      gap: 1rem;
-      padding: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    .lang-switch {
-      background-color: #f5f5f5;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      padding: 0.6rem 1.2rem;
-      font-size: 1.2rem;
-      color: #333;
-      cursor: pointer;
-      opacity: 0.9;
-      transition: all 0.2s ease;
-      flex: 1;
-      max-width: 120px;
-      text-align: center;
-    }
-
-    .lang-switch:hover {
-      opacity: 1;
-      background-color: #eaeaea;
-    }
-
-    .lang-switch.active {
-      font-weight: bold;
-      background-color: #ddd;
-    }
-
-    main[dir="rtl"] {
-      direction: rtl;
-      text-align: right;
-    }
-
-    main[dir="ltr"] {
-      direction: ltr;
-      text-align: left;
-    }
-
-    @media (max-width: 600px) {
-      .lang-switch {
-        font-size: 1.1rem;
-        padding: 0.6rem;
-      }
-
-      .lang-container {
-        gap: 0.6rem;
-      }
-    }
-  </style>
 </head>
+
 <body>
+  <!-- language switch -->
   <div class="lang-container">
     <button id="heBtn" class="lang-switch active">עברית</button>
     <button id="enBtn" class="lang-switch">English</button>
   </div>
 
-  <main id="main" dir="rtl">
-    <div id="content">טוען...</div>
+  <!-- memoir content -->
+  <main id="main" class="container" dir="rtl">
+    <div id="content">טוען…</div>
   </main>
 
+  <!-- sticky contact pill -->
+  <a href="#contact" class="contact-btn" aria-label="Contact">✉️</a>
+
+  <!-- footer -->
+  <footer id="contact">
+    <div class="contact-info">
+      <a href="https://www.instagram.com/tully_hoffmann" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/256px-Instagram_logo_2022.svg.png"
+             alt="" class="icon" />Tully Instagram
+      </a>
+      <a href="https://www.instagram.com/rawpresence" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/256px-Instagram_logo_2022.svg.png"
+             alt="" class="icon" />Raw Presence Lab
+      </a>
+      <a href="mailto:tullyhoffmann@gmail.com">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Email_icon_%282013-2018%29.svg/256px-Email_icon_%282013-2018%29.svg.png"
+             alt="" class="icon" />Email
+      </a>
+    </div>
+    <p class="copyright">© 2025 Tully Hoffmann. All rights reserved.</p>
+  </footer>
+
+  <!-- JS: language loader + scroll-progress -->
   <script>
     const contentEl = document.getElementById('content');
-    const mainEl = document.getElementById('main');
-    const heBtn = document.getElementById('heBtn');
-    const enBtn = document.getElementById('enBtn');
+    const mainEl    = document.getElementById('main');
+    const heBtn     = document.getElementById('heBtn');
+    const enBtn     = document.getElementById('enBtn');
 
     function loadLanguage(lang) {
-      const file = lang === 'en' ? 'memoir.md' : 'memoir-he.md';
+      const file = (lang === 'en') ? 'memoir.md' : 'memoir-he.md';
       fetch(file)
-        .then(response => response.text())
-        .then(text => {
+        .then(r => r.text())
+        .then(md => {
           marked.setOptions({ breaks: true });
-          contentEl.innerHTML = marked.parse(text);
+          contentEl.innerHTML = marked.parse(md);
         });
-
       document.documentElement.lang = lang;
       mainEl.setAttribute('dir', lang === 'he' ? 'rtl' : 'ltr');
       heBtn.classList.toggle('active', lang === 'he');
@@ -100,28 +73,15 @@
 
     heBtn.addEventListener('click', () => loadLanguage('he'));
     enBtn.addEventListener('click', () => loadLanguage('en'));
+    loadLanguage('he'); // default
 
-    // Load Hebrew by default
-    loadLanguage('he');
+    /* ---- tiny scroll-progress bar (optional) ---- */
+    const root = document.documentElement;
+    window.addEventListener('scroll', () => {
+      const h = document.documentElement.scrollHeight - innerHeight;
+      const scrolled = (scrollY / h) * 100;
+      root.style.setProperty('--scroll', `${scrolled}%`);
+    });
   </script>
 </body>
-<footer>
-  <div class="contact-info">
-    <a href="https://www.instagram.com/tully_hoffmann" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/512px-Instagram_logo_2022.svg.png" alt="Instagram" class="icon" />
-      Tully Instagram Instagram
-    </a> |
-    <a href="https://www.instagram.com/rawpresence" target="_blank">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/512px-Instagram_logo_2022.svg.png" alt="Instagram" class="icon" />
-      Raw Presence Lab Instagram
-    </a> |
-    <a href="mailto:tullyhoffmann@gmail.com">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d7/Email_icon_%282013-2018%29.svg/512px-Email_icon_%282013-2018%29.svg.png" alt="Email" class="icon" />
-      Send Email
-    </a>
-  </div>
-  <div class="copyright">
-    <p>&copy; 2025 Tully Hoffmann. All rights reserved.</p>
-  </div>
-</footer>
 </html>
