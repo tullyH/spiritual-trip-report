@@ -1,24 +1,71 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>What I Saw When I Woke Up</title>
+  <title>מה שראיתי כשקמתי</title>
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <style>
+    .lang-switch {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      background-color: #f5f5f5;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 0.4rem 1rem;
+      font-size: 1rem;
+      color: #333;
+      cursor: pointer;
+      opacity: 0.8;
+      transition: all 0.2s ease;
+    }
+
+    .lang-switch:hover {
+      opacity: 1;
+      background-color: #eaeaea;
+    }
+
+    .lang-switch.active {
+      font-weight: bold;
+      background-color: #ddd;
+    }
+  </style>
 </head>
 <body>
+  <div style="text-align: right;">
+    <button id="heBtn" class="lang-switch active">עברית</button>
+    <button id="enBtn" class="lang-switch" style="right: 6rem;">English</button>
+  </div>
   <main>
-    <div id="content">Loading...</div>
+    <div id="content">טוען...</div>
   </main>
+
   <script>
-    fetch('memoir.md')
-      .then(response => response.text())
-      .then(text => {
-        marked.setOptions({ breaks: true });
-        document.getElementById('content').innerHTML = marked.parse(text);
-      });
-  </script>  
+    const contentEl = document.getElementById('content');
+    const heBtn = document.getElementById('heBtn');
+    const enBtn = document.getElementById('enBtn');
+
+    function loadLanguage(lang) {
+      const file = lang === 'en' ? 'memoir.md' : 'memoir-he.md';
+      fetch(file)
+        .then(response => response.text())
+        .then(text => {
+          marked.setOptions({ breaks: true });
+          contentEl.innerHTML = marked.parse(text);
+        });
+
+      document.documentElement.lang = lang === 'en' ? 'en' : 'he';
+      heBtn.classList.toggle('active', lang === 'he');
+      enBtn.classList.toggle('active', lang === 'en');
+    }
+
+    heBtn.addEventListener('click', () => loadLanguage('he'));
+    enBtn.addEventListener('click', () => loadLanguage('en'));
+
+    // Load Hebrew by default
+    loadLanguage('he');
+  </script>
 </body>
 </html>
