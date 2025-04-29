@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>מה שראיתי כשקמתי</title>
 
   <!-- favicon -->
   <link rel="icon"
-        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔆</text></svg>'">
-  <link rel="stylesheet" href="style.css">
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔆</text></svg>" />
+  <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
-  <!-- language + contact pills -->
+  <!-- language + contact row -->
   <div class="lang-container">
     <button id="heBtn" class="lang-switch active">עברית</button>
     <button id="enBtn" class="lang-switch">English</button>
-    <a href="#contact" class="lang-switch contact-switch">Contact</a>
+    <a href="#contact" class="lang-switch">Contact</a>
   </div>
 
   <!-- memoir -->
@@ -42,46 +42,50 @@
     <div class="contact-info">
       <a href="https://www.instagram.com/tully_hoffmann" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/256px-Instagram_logo_2022.svg.png"
-             alt="" class="icon">Tully Instagram
+             alt="" class="icon" />Tully Instagram
       </a>
       <a href="https://www.instagram.com/rawpresence" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/256px-Instagram_logo_2022.svg.png"
-             alt="" class="icon">Raw Presence Lab
+             alt="" class="icon" />Raw Presence Lab
       </a>
       <a href="mailto:tullyhoffmann@gmail.com">✉️ Email</a>
     </div>
     <p class="copyright">© 2025 Tully Hoffmann — All rights reserved</p>
   </footer>
 
+  <!-- ===== FIXED SCRIPT: nav + TOC now work every time ===== -->
   <script>
-    /* ---------- language / markdown loader ---------- */
     const contentEl = document.getElementById('content');
     const mainEl    = document.getElementById('main');
     const heBtn     = document.getElementById('heBtn');
     const enBtn     = document.getElementById('enBtn');
 
-    let headings = [], current = 0;
+    let headings = [];
+    let current  = 0;
+    let observer = null;            // keep the current IntersectionObserver
 
+    /* load markdown */
     function loadLang(lang){
-      fetch(lang==='en' ? 'memoir.md' : 'memoir-he.md')
+      fetch(lang === 'en' ? 'memoir.md' : 'memoir-he.md')
         .then(r => r.text())
         .then(md => {
           marked.setOptions({ breaks:true });
           contentEl.innerHTML = marked.parse(md);
-          buildTOC();  observeSections();
+          buildTOC();
+          observeSections();        // create fresh observer
+          updateNav();              // enable buttons immediately
         });
 
       document.documentElement.lang = lang;
-      mainEl.dir = (lang==='he') ? 'rtl' : 'ltr';
-      heBtn.classList.toggle('active', lang==='he');
-      enBtn.classList.toggle('active', lang==='en');
+      mainEl.dir = (lang === 'he') ? 'rtl' : 'ltr';
+      heBtn.classList.toggle('active', lang === 'he');
+      enBtn.classList.toggle('active', lang === 'en');
     }
-
     heBtn.onclick = () => loadLang('he');
     enBtn.onclick = () => loadLang('en');
-    loadLang('he');   // default
+    loadLang('he');                 // initial load
 
-    /* ---------- TOC ---------- */
+    /* build TOC */
     const tocOverlay = document.getElementById('tocOverlay');
     const tocList    = document.getElementById('tocList');
 
@@ -94,14 +98,14 @@
           `<li><a href="#${h.id}">${h.textContent}</a></li>`);
       });
     }
-
     document.getElementById('tocBtn').onclick = () =>
       tocOverlay.classList.add('open');
     tocOverlay.onclick = e =>
       (e.target === tocOverlay) && tocOverlay.classList.remove('open');
-    tocList.addEventListener('click', () => tocOverlay.classList.remove('open'));
+    tocList.addEventListener('click', () =>
+      tocOverlay.classList.remove('open'));
 
-    /* ---------- section observer for prev / next ---------- */
+    /* prev / next buttons */
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
 
@@ -110,20 +114,26 @@
     nextBtn.onclick = () =>
       (current < headings.length-1) && headings[current+1].scrollIntoView({ behavior:'smooth' });
 
+    function updateNav(){
+      prevBtn.disabled = (current === 0);
+      nextBtn.disabled = (current === headings.length - 1);
+    }
+
+    /* observe sections */
     function observeSections(){
-      const io = new IntersectionObserver(entries => {
+      if (observer) observer.disconnect();   // kill previous observer
+      observer = new IntersectionObserver(entries => {
         entries.forEach(e => {
           if (e.isIntersecting){
             current = headings.indexOf(e.target);
-            prevBtn.disabled = current === 0;
-            nextBtn.disabled = current === headings.length - 1;
+            updateNav();
           }
         });
-      }, { rootMargin:'-45% 0 -45%' });
-      headings.forEach(h => io.observe(h));
+      }, { rootMargin:'-45% 0px -45% 0px' });
+      headings.forEach(h => observer.observe(h));
     }
 
-    /* ---------- hide nav on scroll down ---------- */
+    /* hide nav on scroll down */
     const bar = document.getElementById('bottomNav');
     let lastY = 0, t;
     addEventListener('scroll', () => {
@@ -133,7 +143,7 @@
       clearTimeout(t); t = setTimeout(() => bar.classList.remove('hide'), 120);
     }, { passive:true });
 
-    /* ---------- tiny progress bar ---------- */
+    /* progress bar */
     const root = document.documentElement;
     addEventListener('scroll', () => {
       const h = document.documentElement.scrollHeight - innerHeight;
