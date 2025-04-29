@@ -20,25 +20,32 @@
     <button id="enBtn" class="lang-switch">English</button>
   </div>
 
+  <!-- NEW contact shortcut -->
+  <div class="quick-contact">
+    <a href="#contact" aria-label="Instagram / Contact">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/128px-Instagram_logo_2022.svg.png"
+           alt="" class="qc-icon" />
+    </a>
+    <a href="#contact" aria-label="Email">
+      ✉️
+    </a>
+  </div>
+
   <!-- memoir content -->
   <main id="main" class="container" dir="rtl">
     <div id="content">טוען…</div>
   </main>
 
-  <!-- bottom navigation (always visible) -->
+  <!-- bottom nav (thin, hides on scroll) -->
   <nav id="bottomNav" class="bottom-nav">
-    <button id="prevBtn"><span class="icon-nav">⬆️</span><small>Prev</small></button>
-    <button id="tocBtn"><span class="icon-nav">☰</span><small>Index</small></button>
-    <button id="nextBtn"><span class="icon-nav">⬇️</span><small>Next</small></button>
-    <a   href="#contact" class="footerBtn"><span class="icon-nav">📷</span><small>IG</small></a>
+    <button id="prevBtn" aria-label="Previous">⬆️</button>
+    <button id="tocBtn"  aria-label="Index">☰</button>
+    <button id="nextBtn" aria-label="Next">⬇️</button>
   </nav>
 
   <!-- TOC drawer -->
   <aside id="tocOverlay" class="toc-overlay">
-    <div class="toc-sheet">
-      <h3>תוכן עניינים</h3>
-      <ul id="tocList"></ul>
-    </div>
+    <div class="toc-sheet"><ul id="tocList"></ul></div>
   </aside>
 
   <!-- footer -->
@@ -58,71 +65,70 @@
   </footer>
 
   <script>
-    /* --- markdown loader --- */
+    /* ------------ markdown loader + language switch ------------ */
     const contentEl = document.getElementById('content');
     const mainEl    = document.getElementById('main');
     const heBtn     = document.getElementById('heBtn');
     const enBtn     = document.getElementById('enBtn');
 
-    let headings = [], currentIndex = 0;
-    function loadLanguage(lang) {
-      fetch(lang === 'en' ? 'memoir.md' : 'memoir-he.md')
-        .then(r => r.text())
-        .then(md => {
-          marked.setOptions({ breaks:true });
-          contentEl.innerHTML = marked.parse(md);
-          buildTOC(); observeSections();
+    let headings=[],current=0;
+    function loadLang(l){
+      fetch(l==='en'?'memoir.md':'memoir-he.md')
+        .then(r=>r.text())
+        .then(md=>{
+          marked.setOptions({breaks:true});
+          contentEl.innerHTML=marked.parse(md);
+          buildTOC();observe();
         });
-      document.documentElement.lang = lang;
-      mainEl.setAttribute('dir', lang === 'he' ? 'rtl' : 'ltr');
-      [heBtn, enBtn].forEach(btn => btn.classList.toggle('active', btn.id.startsWith(lang)));
+      document.documentElement.lang=l;
+      mainEl.dir=(l==='he')?'rtl':'ltr';
+      heBtn.classList.toggle('active',l==='he');
+      enBtn.classList.toggle('active',l==='en');
     }
-    heBtn.onclick = () => loadLanguage('he');
-    enBtn.onclick = () => loadLanguage('en');
-    loadLanguage('he');   // default
+    heBtn.onclick=()=>loadLang('he');
+    enBtn.onclick=()=>loadLang('en');
+    loadLang('he');
 
-    /* --- TOC & anchors --- */
-    const tocOverlay = document.getElementById('tocOverlay');
-    const tocList    = document.getElementById('tocList');
+    /* ------------ TOC ------------ */
+    const tocOverlay=document.getElementById('tocOverlay');
+    const tocList   =document.getElementById('tocList');
     function buildTOC(){
-      tocList.innerHTML = '';
-      headings = [...contentEl.querySelectorAll('h2')];
+      headings=[...contentEl.querySelectorAll('h2')];
+      tocList.innerHTML='';
       headings.forEach((h,i)=>{
-        h.id=`section-${i}`;
+        h.id=`s${i}`;
         tocList.insertAdjacentHTML('beforeend',`<li><a href="#${h.id}">${h.textContent}</a></li>`);
       });
     }
+    document.getElementById('tocBtn').onclick=()=>tocOverlay.classList.add('open');
+    tocOverlay.onclick=e=>{if(e.target===tocOverlay)tocOverlay.classList.remove('open')};
+    tocList.addEventListener('click',()=>tocOverlay.classList.remove('open'));
 
-    /* --- section observer --- */
-    function observeSections(){
-      const io=new IntersectionObserver(entries=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){currentIndex=headings.indexOf(e.target);updateNav();}
-        });
-      },{rootMargin:'-45% 0px -45% 0px'});
-      headings.forEach(h=>io.observe(h));
-    }
-
-    /* --- bottom nav actions --- */
+    /* ------------ prev / next detection ------------ */
     const prevBtn=document.getElementById('prevBtn');
     const nextBtn=document.getElementById('nextBtn');
-    prevBtn.onclick=()=>{if(currentIndex>0) headings[currentIndex-1].scrollIntoView({behavior:'smooth'});};
-    nextBtn.onclick=()=>{if(currentIndex<headings.length-1) headings[currentIndex+1].scrollIntoView({behavior:'smooth'});};
-    const tocBtn=document.getElementById('tocBtn');
-    tocBtn.onclick = ()=>tocOverlay.classList.add('open');
-    tocOverlay.onclick = e=>{if(e.target===tocOverlay) tocOverlay.classList.remove('open');};
-    tocList.addEventListener('click',()=>tocOverlay.classList.remove('open'));
+    prevBtn.onclick=()=>current>0&&headings[current-1].scrollIntoView({behavior:'smooth'});
+    nextBtn.onclick=()=>current<headings.length-1&&headings[current+1].scrollIntoView({behavior:'smooth'});
+    function observe(){
+      const io=new IntersectionObserver(es=>{
+        es.forEach(e=>{if(e.isIntersecting){current=headings.indexOf(e.target);updateNav();}});
+      },{rootMargin:'-45% 0 -45%'});
+      headings.forEach(h=>io.observe(h));
+    }
     function updateNav(){
-      prevBtn.disabled=currentIndex===0;
-      nextBtn.disabled=currentIndex===headings.length-1;
+      prevBtn.disabled=current===0;
+      nextBtn.disabled=current===headings.length-1;
     }
 
-    /* --- scroll progress bar --- */
-    const root=document.documentElement;
-    window.addEventListener('scroll',()=>{
-      const h=document.documentElement.scrollHeight-innerHeight;
-      root.style.setProperty('--scroll',`${(scrollY/h)*100}%`);
-    });
+    /* ------------ hide bar on scroll ------------ */
+    const bar=document.getElementById('bottomNav');
+    let last=0,t;
+    addEventListener('scroll',()=>{
+      const y=scrollY;
+      if(y>last+10) bar.classList.add('hide');
+      last=y;
+      clearTimeout(t);t=setTimeout(()=>bar.classList.remove('hide'),120);
+    },{passive:true});
   </script>
 </body>
 </html>
