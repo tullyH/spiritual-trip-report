@@ -3,7 +3,7 @@
 
 /* ==== reset & root tweaks ==== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:clamp(17px,1.4vw+15px,21px)}
+html{font-size:clamp(19px,2vw+16px,24px)}
 body{
   font-family:'Georgia',serif;
   background:#fff;
@@ -16,20 +16,18 @@ body::before{
   content:'';
   position:fixed;
   top:0;left:0;
-  height:3px;
-  width:var(--scroll,0%);
-  background:#222;
-  z-index:999;
+  height:3px; width:var(--scroll,0%);
+  background:#222; z-index:999;
 }
 
-/* ==== language switcher ==== */
+/* ==== language switch ==== */
 .lang-container{
-  display:flex;justify-content:center;gap:1rem;padding:1rem
+  display:flex; justify-content:center; gap:1rem; padding:1rem;
 }
 .lang-switch{
-  flex:1;max-width:120px;border:1px solid #ccc;border-radius:8px;
-  background:#f5f5f5;font-size:1rem;padding:0.6rem 1rem;
-  cursor:pointer;transition:.2s
+  flex:1; max-width:120px; border:1px solid #ccc; border-radius:8px;
+  background:#f5f5f5; font-size:1rem; padding:0.6rem 1rem;
+  cursor:pointer; transition:.2s;
 }
 .lang-switch:hover{background:#eaeaea}
 .lang-switch.active{font-weight:700;background:#ddd}
@@ -40,7 +38,7 @@ body::before{
 /* ==== headings ==== */
 h1,h2,h3{
   font-family:'Playfair Display',serif;font-weight:800;text-wrap:balance;
-  margin-block:2rem 1rem;color:#000
+  margin-block:2rem 1rem;color:#000;
 }
 h1{font-size:clamp(2.2rem,6vw,3.2rem);text-align:center}
 h2{font-size:clamp(1.8rem,5vw,2.4rem);text-align:center;font-style:italic}
@@ -51,14 +49,14 @@ p{margin-block:1rem;max-width:42ch}
 
 /* ==== footer & socials ==== */
 footer{
-  background:#f5f5f5;margin-top:4rem;padding:2rem 1rem;text-align:center
+  background:#f5f5f5;margin-top:4rem;padding:2rem 1rem;text-align:center;
 }
 .contact-info{
-  display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:1rem
+  display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:1rem;
 }
 .contact-info a{
   display:inline-flex;align-items:center;gap:0.4rem;
-  color:#333;font-weight:600;text-decoration:none
+  color:#333;font-weight:600;text-decoration:none;
 }
 .contact-info a:hover{color:#0077cc}
 .icon{width:1.5rem;height:1.5rem}
@@ -66,19 +64,40 @@ footer{
 /* copyright */
 copyright,.copyright{font-size:0.8rem;color:#555}
 
-/* ==== sticky contact button ==== */
-.contact-btn{
-  position:fixed;bottom:1.2rem;right:1.2rem;
-  background:#222;color:#fff;font-size:1.2rem;
-  padding:0.6rem 0.8rem 0.5rem;border-radius:50%;
-  text-decoration:none;box-shadow:0 2px 6px rgba(0,0,0,.25);
+/* ==== bottom nav bar ==== */
+.bottom-nav{
+  position:fixed;bottom:0;left:0;right:0;
+  display:flex;justify-content:center;gap:1.5rem;
+  background:#222;color:#fff;padding:0.6rem 0;
   transition:transform .25s, opacity .25s;
-  z-index:998
+  z-index:998;
 }
-.contact-btn:hover{transform:scale(1.1)}
-.contact-btn.hide{opacity:0;pointer-events:none;transform:translateY(60px)}
+.bottom-nav button{
+  background:none;border:none;color:inherit;font-size:1.3rem;
+  padding:0.2rem 0.6rem;cursor:pointer;
+}
+.bottom-nav button:disabled{opacity:.4;cursor:default}
+.bottom-nav.hide{opacity:0;pointer-events:none;transform:translateY(100%)}
 
-/* ==== responsive tweak for tiny phones ==== */
+/* ==== TOC overlay ==== */
+.toc-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.4);
+  display:none;align-items:flex-end; /* slide up */
+  z-index:1000;
+}
+.toc-overlay.open{display:flex;}
+.toc-sheet{
+  width:100%;max-height:70vh;
+  background:#fff;border-radius:12px 12px 0 0;
+  padding:1.2rem 1rem 2rem;overflow-y:auto;
+}
+.toc-sheet h3{margin-block:0 1rem;font-size:1.2rem;text-align:center}
+.toc-sheet ul{list-style:none;padding:0}
+.toc-sheet li{margin:0.6rem 0}
+.toc-sheet a{color:#0077cc;text-decoration:none;font-size:1rem}
+.toc-sheet a:visited{color:#5050aa}
+
+/* ==== responsive tweak ==== */
 @media (max-width:450px){
   .lang-switch{font-size:0.9rem}
 }
