@@ -12,20 +12,27 @@
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 
   <style>
+    .lang-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
+
     .lang-switch {
-      position: fixed;
-      top: 1rem;
-      right: 1rem;
       background-color: #f5f5f5;
       border: 1px solid #ccc;
       border-radius: 8px;
-      padding: 0.4rem 1rem;
-      font-size: 1rem;
+      padding: 0.6rem 1.2rem;
+      font-size: 1.2rem;
       color: #333;
       cursor: pointer;
-      opacity: 0.8;
+      opacity: 0.9;
       transition: all 0.2s ease;
-      z-index: 10;
+      flex: 1;
+      max-width: 120px;
+      text-align: center;
     }
 
     .lang-switch:hover {
@@ -47,12 +54,23 @@
       direction: ltr;
       text-align: left;
     }
+
+    @media (max-width: 600px) {
+      .lang-switch {
+        font-size: 1.1rem;
+        padding: 0.6rem;
+      }
+
+      .lang-container {
+        gap: 0.6rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div style="text-align: right;">
+  <div class="lang-container">
     <button id="heBtn" class="lang-switch active">עברית</button>
-    <button id="enBtn" class="lang-switch" style="right: 6rem;">English</button>
+    <button id="enBtn" class="lang-switch">English</button>
   </div>
 
   <main id="main" dir="rtl">
