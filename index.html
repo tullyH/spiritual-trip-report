@@ -12,28 +12,17 @@
 </head>
 
 <body>
-  <!-- language + contact row -->
+  <!-- language + contact pills -->
   <div class="lang-container">
     <button id="heBtn" class="lang-switch active">עברית</button>
     <button id="enBtn" class="lang-switch">English</button>
     <a href="#contact" class="lang-switch">Contact</a>
   </div>
 
-  <!-- TOP nav bar (always visible) -->
-  <nav id="topNav" class="top-nav">
-    <button id="prevBtn" aria-label="Previous">⬅︎ Prev</button>
-    <button id="tocBtn"  aria-label="Index">☰ Index</button>
-    <button id="nextBtn" aria-label="Next">Next ➡︎</button>
-  </nav>
-
+  <!-- markdown content -->
   <main id="main" class="container" dir="rtl">
     <div id="content">טוען…</div>
   </main>
-
-  <!-- TOC drawer -->
-  <aside id="tocOverlay" class="toc-overlay">
-    <div class="toc-sheet"><ul id="tocList"></ul></div>
-  </aside>
 
   <!-- footer -->
   <footer id="contact">
@@ -52,90 +41,28 @@
   </footer>
 
   <script>
-    /* ---------- core elements ---------- */
     const contentEl = document.getElementById('content');
     const mainEl    = document.getElementById('main');
     const heBtn     = document.getElementById('heBtn');
     const enBtn     = document.getElementById('enBtn');
-    const prevBtn   = document.getElementById('prevBtn');
-    const nextBtn   = document.getElementById('nextBtn');
-    const tocBtn    = document.getElementById('tocBtn');
-    const tocOverlay= document.getElementById('tocOverlay');
-    const tocList   = document.getElementById('tocList');
 
-    let headings = [];
-    let current  = 0;
-    let observer = null;
-
-    /* ---------- load markdown & rebuild nav ---------- */
-    function loadLanguage(lang){
-      fetch(lang==='en' ? 'memoir.md' : 'memoir-he.md')
+    function loadLang(lang){
+      fetch(lang === 'en' ? 'memoir.md' : 'memoir-he.md')
         .then(r => r.text())
         .then(md => {
           marked.setOptions({ breaks:true });
           contentEl.innerHTML = marked.parse(md);
-          buildTOC();
-          attachObserver();
-          updateButtons();
         });
 
       document.documentElement.lang = lang;
-      mainEl.dir = (lang==='he') ? 'rtl' : 'ltr';
-      heBtn.classList.toggle('active', lang==='he');
-      enBtn.classList.toggle('active', lang==='en');
+      mainEl.dir = (lang === 'he') ? 'rtl' : 'ltr';
+      heBtn.classList.toggle('active', lang === 'he');
+      enBtn.classList.toggle('active', lang === 'en');
     }
 
-    heBtn.onclick = () => loadLanguage('he');
-    enBtn.onclick = () => loadLanguage('en');
-    loadLanguage('he');                         // initial
-
-    /* ---------- TOC ---------- */
-    function buildTOC(){
-      headings = [...contentEl.querySelectorAll('h2')];
-      tocList.innerHTML = '';
-      headings.forEach((h,i)=>{
-        h.id = `sec${i}`;
-        tocList.insertAdjacentHTML('beforeend',
-          `<li><a href="#${h.id}">${h.textContent}</a></li>`);
-      });
-    }
-
-    tocBtn.onclick = () => tocOverlay.classList.add('open');
-    tocOverlay.onclick = e =>
-      (e.target === tocOverlay) && tocOverlay.classList.remove('open');
-    tocList.addEventListener('click', () => tocOverlay.classList.remove('open'));
-
-    /* ---------- prev / next ---------- */
-    prevBtn.onclick = () =>
-      (current>0)&&headings[current-1].scrollIntoView({behavior:'smooth'});
-    nextBtn.onclick = () =>
-      (current<headings.length-1)&&headings[current+1].scrollIntoView({behavior:'smooth'});
-
-    function updateButtons(){
-      prevBtn.disabled = (current===0);
-      nextBtn.disabled = (current===headings.length-1);
-    }
-
-    /* ---------- section observer ---------- */
-    function attachObserver(){
-      if(observer) observer.disconnect();
-      observer = new IntersectionObserver(entries=>{
-        entries.forEach(e=>{
-          if(e.isIntersecting){
-            current = headings.indexOf(e.target);
-            updateButtons();
-          }
-        });
-      }, { threshold:0.3 });         // simple & reliable
-      headings.forEach(h=>observer.observe(h));
-    }
-
-    /* ---------- progress bar ---------- */
-    const root = document.documentElement;
-    addEventListener('scroll', ()=>{
-      const max = document.documentElement.scrollHeight - innerHeight;
-      root.style.setProperty('--scroll', `${(scrollY/max)*100}%`);
-    });
+    heBtn.onclick = () => loadLang('he');
+    enBtn.onclick = () => loadLang('en');
+    loadLang('he');                         // initial load
   </script>
 </body>
 </html>

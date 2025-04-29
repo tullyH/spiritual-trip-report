@@ -1,18 +1,78 @@
-/* top nav */
-.top-nav{
-  position:fixed;top:82px;left:0;right:0;   /* sits under language row */
-  display:flex;justify-content:center;gap:2rem;
-  background:#222;color:#fff;padding:.4rem 0;z-index:998;
-}
-.top-nav button{
-  background:none;border:none;color:inherit;font-size:1rem;cursor:pointer;
-}
-.top-nav button:disabled{opacity:.35;cursor:default}
+/* fonts */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Georgia&display=swap');
 
-/* avoid headers hiding under nav */
-h2{scroll-margin-top:110px;}  /* nav(44)+lang row(66) ≈ 110 */
-
-/* TOC sheet width tweak for desktop */
-@media (min-width:700px){
-  .toc-sheet{max-width:420px;margin:0 auto;border-radius:12px;}
+/* base layout + original typography */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'Georgia',serif;
+  font-size:1.6rem;          /* original size */
+  line-height:2.2;
+  color:#111;
+  background:#fff;
+  padding:4rem 1.5rem;       /* original breathing room */
 }
+
+/* keep columns inside viewport on small phones */
+@media(max-width:600px){
+  .container{max-width:100%;}
+  img,video,pre{max-width:100%;}
+}
+
+/* language / contact pills */
+.lang-container{
+  display:flex;justify-content:center;gap:1rem;padding-bottom:1rem;
+}
+.lang-switch{
+  flex:1;max-width:130px;
+  padding:.6rem 1rem;
+  border:1px solid #ccc;border-radius:8px;
+  background:#f5f5f5;text-align:center;
+  font-size:.9rem;color:#333;text-decoration:none;cursor:pointer;
+}
+.lang-switch.active{font-weight:700;background:#ddd}
+.lang-switch:hover{background:#eaeaea}
+
+/* content wrapper (matches original 850-px body max) */
+.container{max-width:850px;margin:0 auto;word-wrap:break-word}
+
+/* headings – original sizes & spacing */
+h1,h2,h3{
+  font-family:'Playfair Display',serif;
+  font-weight:800;color:#000;
+}
+h1{
+  font-size:3.2rem;
+  text-align:center;
+  margin:3rem 0 1.5rem;
+}
+h2{
+  font-size:2.4rem;
+  text-align:start;          /* RTL/LTR via dir */
+  font-style:italic;
+  margin:3rem 0 1.5rem;
+}
+h3{
+  font-size:1.8rem;
+  margin:3rem 0 1.5rem;
+}
+
+/* paragraphs */
+p{margin-bottom:1.5rem;max-width:48ch}
+
+/* footer */
+footer{
+  background:#f5f5f5;
+  padding:2rem 1rem;
+  margin-top:4rem;
+  text-align:center;
+}
+.contact-info{
+  display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:1rem;
+}
+.contact-info a{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-weight:600;color:#333;text-decoration:none;
+}
+.contact-info a:hover{color:#0077cc}
+.icon{width:1.6rem;height:1.6rem}
+copyright,.copyright{font-size:.8rem;color:#555}
