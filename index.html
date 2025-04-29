@@ -5,8 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>מה שראיתי כשקמתי</title>
 
+  <!-- favicon -->
   <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔆</text></svg>" />
+
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
@@ -19,7 +21,7 @@
     <a href="#contact" class="lang-switch">Contact</a>
   </div>
 
-  <!-- markdown content -->
+  <!-- memoir content -->
   <main id="main" class="container" dir="rtl">
     <div id="content">טוען…</div>
   </main>
@@ -31,7 +33,7 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/256px-Instagram_logo_2022.svg.png"
              class="icon" alt="">Tully Instagram
       </a>
-      <a href="https://www.instagram.com/rawpresence1" target="_blank">
+      <a href="https://www.instagram.com/rawpresence" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/256px-Instagram_logo_2022.svg.png"
              class="icon" alt="">Raw Presence Lab
       </a>
@@ -40,29 +42,37 @@
     <p class="copyright">© 2025 Tully Hoffmann — All rights reserved</p>
   </footer>
 
+  <!-- single, simple script -->
   <script>
     const contentEl = document.getElementById('content');
     const mainEl    = document.getElementById('main');
     const heBtn     = document.getElementById('heBtn');
     const enBtn     = document.getElementById('enBtn');
 
+    /* load markdown */
     function loadLang(lang){
-      fetch(lang === 'en' ? 'memoir.md' : 'memoir-he.md')
+      fetch(lang==='en' ? 'memoir.md' : 'memoir-he.md')
         .then(r => r.text())
         .then(md => {
-          marked.setOptions({ breaks:true });
+          marked.setOptions({ breaks:true });         // every newline shows
           contentEl.innerHTML = marked.parse(md);
         });
 
       document.documentElement.lang = lang;
-      mainEl.dir = (lang === 'he') ? 'rtl' : 'ltr';
-      heBtn.classList.toggle('active', lang === 'he');
-      enBtn.classList.toggle('active', lang === 'en');
+      mainEl.dir = (lang==='he') ? 'rtl' : 'ltr';
+      heBtn.classList.toggle('active', lang==='he');
+      enBtn.classList.toggle('active', lang==='en');
     }
-
     heBtn.onclick = () => loadLang('he');
     enBtn.onclick = () => loadLang('en');
-    loadLang('he');                         // initial load
+    loadLang('he');                                   // initial load
+
+    /* progress bar */
+    const root = document.documentElement;
+    addEventListener('scroll', () => {
+      const max = document.documentElement.scrollHeight - innerHeight;
+      root.style.setProperty('--scroll', `${(scrollY / max) * 100}%`);
+    });
   </script>
 </body>
 </html>

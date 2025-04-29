@@ -1,18 +1,30 @@
 /* fonts */
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Georgia&display=swap');
 
-/* base layout + original typography */
+/* base reset + original typography */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
 body{
   font-family:'Georgia',serif;
   font-size:1.6rem;          /* original size */
-  line-height:2.2;
+  line-height:2.2;           /* original spacing */
   color:#111;
   background:#fff;
   padding:4rem 1.5rem;       /* original breathing room */
 }
 
-/* keep columns inside viewport on small phones */
+/* progress strip */
+body::before{
+  content:'';
+  position:fixed;
+  top:0;left:0;
+  height:3px;
+  width:var(--scroll,0);
+  background:#222;
+  z-index:999;
+}
+
+/* prevent overflow on phones */
 @media(max-width:600px){
   .container{max-width:100%;}
   img,video,pre{max-width:100%;}
@@ -32,10 +44,10 @@ body{
 .lang-switch.active{font-weight:700;background:#ddd}
 .lang-switch:hover{background:#eaeaea}
 
-/* content wrapper (matches original 850-px body max) */
+/* content wrapper matches your 850-px original */
 .container{max-width:850px;margin:0 auto;word-wrap:break-word}
 
-/* headings – original sizes & spacing */
+/* headings: original sizes + spacing */
 h1,h2,h3{
   font-family:'Playfair Display',serif;
   font-weight:800;color:#000;
@@ -47,8 +59,8 @@ h1{
 }
 h2{
   font-size:2.4rem;
-  text-align:start;          /* RTL/LTR via dir */
   font-style:italic;
+  text-align:start;          /* auto RTL/LTR */
   margin:3rem 0 1.5rem;
 }
 h3{
@@ -57,7 +69,11 @@ h3{
 }
 
 /* paragraphs */
-p{margin-bottom:1.5rem;max-width:48ch}
+p{
+  margin-bottom:1.5rem;
+  max-width:48ch;
+  white-space:pre-line;      /* shows every newline from .md file */
+}
 
 /* footer */
 footer{
