@@ -5,27 +5,32 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>מה שראיתי כשקמתי</title>
 
+  <!-- Favicon -->
   <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔆</text></svg>" />
+
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
+  <!-- language switch -->
   <div class="lang-container">
     <button id="heBtn" class="lang-switch active">עברית</button>
     <button id="enBtn" class="lang-switch">English</button>
   </div>
 
+  <!-- memoir content -->
   <main id="main" class="container" dir="rtl">
     <div id="content">טוען…</div>
   </main>
 
-  <!-- bottom navigation -->
+  <!-- bottom navigation (always visible) -->
   <nav id="bottomNav" class="bottom-nav">
     <button id="prevBtn"><span class="icon-nav">⬆️</span><small>Prev</small></button>
     <button id="tocBtn"><span class="icon-nav">☰</span><small>Index</small></button>
     <button id="nextBtn"><span class="icon-nav">⬇️</span><small>Next</small></button>
+    <a   href="#contact" class="footerBtn"><span class="icon-nav">📷</span><small>IG</small></a>
   </nav>
 
   <!-- TOC drawer -->
@@ -43,7 +48,7 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/256px-Instagram_logo_2022.svg.png"
              alt="" class="icon" />Tully Instagram
       </a>
-      <a href="https://www.instagram.com/rawpresence1" target="_blank">
+      <a href="https://www.instagram.com/rawpresence" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/256px-Instagram_logo_2022.svg.png"
              alt="" class="icon" />Raw Presence Lab
       </a>
@@ -74,7 +79,7 @@
     }
     heBtn.onclick = () => loadLanguage('he');
     enBtn.onclick = () => loadLanguage('en');
-    loadLanguage('he');       // default
+    loadLanguage('he');   // default
 
     /* --- TOC & anchors --- */
     const tocOverlay = document.getElementById('tocOverlay');
@@ -118,17 +123,6 @@
       const h=document.documentElement.scrollHeight-innerHeight;
       root.style.setProperty('--scroll',`${(scrollY/h)*100}%`);
     });
-
-    /* --- hide/show nav on scroll --- */
-    const bottomNav=document.getElementById('bottomNav');
-    let lastPos=0, navT;
-    window.addEventListener('scroll',()=>{
-      const cur=scrollY;
-      if(cur>lastPos+10){bottomNav.classList.add('hide');}
-      lastPos=cur;
-      clearTimeout(navT);
-      navT=setTimeout(()=>bottomNav.classList.remove('hide'),150);
-    },{passive:true});
   </script>
 </body>
 </html>

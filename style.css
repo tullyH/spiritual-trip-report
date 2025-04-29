@@ -3,28 +3,28 @@
 
 /* ==== reset & roots ==== */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{font-size:clamp(21px,2.2vw+18px,26px)}
-body{font-family:'Georgia',serif;background:#fff;color:#111;line-height:1.7}
+html{font-size:clamp(24px,3vw+20px,30px)}   /* ← BIGGER base */
+body{font-family:'Georgia',serif;background:#fff;color:#111;line-height:1.75}
 
 /* progress bar */
 body::before{content:'';position:fixed;top:0;left:0;height:3px;width:var(--scroll,0);background:#222;z-index:999}
 
 /* language switch */
 .lang-container{display:flex;justify-content:center;gap:1rem;padding:1rem}
-.lang-switch{flex:1;max-width:120px;border:1px solid #ccc;border-radius:8px;background:#f5f5f5;font-size:1rem;padding:0.6rem 1rem;cursor:pointer;transition:.2s}
+.lang-switch{flex:1;max-width:120px;border:1px solid #ccc;border-radius:8px;background:#f5f5f5;font-size:0.9rem;padding:0.6rem 1rem;cursor:pointer;transition:.2s}
 .lang-switch:hover{background:#eaeaea}.lang-switch.active{font-weight:700;background:#ddd}
 
 /* layout */
-.container{max-width:700px;margin:0 auto;padding-inline:1rem}
+.container{max-width:720px;margin:0 auto;padding-inline:1rem}
 
 /* headings */
 h1,h2,h3{font-family:'Playfair Display',serif;font-weight:800;text-wrap:balance;margin-block:2rem 1rem;color:#000}
-h1{font-size:clamp(2.4rem,7vw,3.4rem);text-align:center}
-h2{font-size:clamp(2rem,6vw,2.7rem);text-align:start;font-style:italic}
-h3{font-size:clamp(1.4rem,4vw,1.7rem)}
+h1{font-size:clamp(2.6rem,7.5vw,3.6rem);text-align:center}
+h2{font-size:clamp(2.2rem,6.5vw,3rem);text-align:start;font-style:italic}
+h3{font-size:clamp(1.5rem,4.5vw,1.9rem)}
 
 /* paragraphs */
-p{margin-block:1.2rem;max-width:45ch}
+p{margin-block:1.4rem;max-width:48ch}
 
 /* footer */
 footer{background:#f5f5f5;margin-top:4rem;padding:2rem 1rem;text-align:center}
@@ -32,22 +32,22 @@ footer{background:#f5f5f5;margin-top:4rem;padding:2rem 1rem;text-align:center}
 .contact-info a{display:inline-flex;align-items:center;gap:0.4rem;color:#333;font-weight:600;text-decoration:none}
 .contact-info a:hover{color:#0077cc}
 .icon{width:1.5rem;height:1.5rem}
-copyright,.copyright{font-size:0.85rem;color:#555}
+copyright,.copyright{font-size:0.8rem;color:#555}
 
 /* bottom nav */
 .bottom-nav{
   position:fixed;bottom:0;left:0;right:0;
-  background:#222;color:#fff;display:flex;justify-content:center;gap:2rem;
-  padding:0.7rem 0;z-index:998;transition:transform .25s,opacity .25s
+  background:#222;color:#fff;display:flex;justify-content:center;gap:2.2rem;
+  padding:0.8rem 0;z-index:998;box-shadow:0 -2px 6px rgba(0,0,0,.15)
 }
-.bottom-nav button{
+.bottom-nav button,
+.bottom-nav .footerBtn{
   background:none;border:none;color:inherit;font-size:1.1rem;
-  display:flex;flex-direction:column;align-items:center;gap:0.15rem;
-  cursor:pointer
+  display:flex;flex-direction:column;align-items:center;gap:0.2rem;
+  cursor:pointer;text-decoration:none
 }
 .bottom-nav button:disabled{opacity:.4;cursor:default}
-.icon-nav{font-size:1.3rem;line-height:1}
-.bottom-nav.hide{opacity:0;pointer-events:none;transform:translateY(100%)}
+.icon-nav{font-size:1.4rem;line-height:1}
 
 /* TOC overlay */
 .toc-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:flex-end;z-index:1000}
@@ -60,4 +60,6 @@ copyright,.copyright{font-size:0.85rem;color:#555}
 .toc-sheet a:visited{color:#5050aa}
 
 /* tiny-phone tweak */
-@media(max-width:450px){.lang-switch{font-size:0.9rem}}
+@media(max-width:450px){
+  .lang-switch{font-size:0.8rem}
+}
