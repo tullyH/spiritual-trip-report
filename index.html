@@ -5,31 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>מה שראיתי כשקמתי</title>
 
-  <!-- Favicon -->
   <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔆</text></svg>" />
-
   <link rel="stylesheet" href="style.css" />
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
 <body>
-  <!-- language switch -->
   <div class="lang-container">
     <button id="heBtn" class="lang-switch active">עברית</button>
     <button id="enBtn" class="lang-switch">English</button>
   </div>
 
-  <!-- memoir content -->
   <main id="main" class="container" dir="rtl">
     <div id="content">טוען…</div>
   </main>
 
-  <!-- bottom nav bar -->
-  <nav id="bottomNav" class="bottom-nav hide">
-    <button id="prevBtn" aria-label="Previous section">⬆️</button>
-    <button id="tocBtn"  aria-label="Table of contents">🗂️</button>
-    <button id="nextBtn" aria-label="Next section">⬇️</button>
+  <!-- bottom navigation -->
+  <nav id="bottomNav" class="bottom-nav">
+    <button id="prevBtn"><span class="icon-nav">⬆️</span><small>Prev</small></button>
+    <button id="tocBtn"><span class="icon-nav">☰</span><small>Index</small></button>
+    <button id="nextBtn"><span class="icon-nav">⬇️</span><small>Next</small></button>
   </nav>
 
   <!-- TOC drawer -->
@@ -47,7 +43,7 @@
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/256px-Instagram_logo_2022.svg.png"
              alt="" class="icon" />Tully Instagram
       </a>
-      <a href="https://www.instagram.com/rawpresence" target="_blank">
+      <a href="https://www.instagram.com/rawpresence1" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/256px-Instagram_logo_2022.svg.png"
              alt="" class="icon" />Raw Presence Lab
       </a>
@@ -57,98 +53,82 @@
   </footer>
 
   <script>
-    /* -------- markdown loader -------- */
+    /* --- markdown loader --- */
     const contentEl = document.getElementById('content');
     const mainEl    = document.getElementById('main');
     const heBtn     = document.getElementById('heBtn');
     const enBtn     = document.getElementById('enBtn');
 
-    let headings = [];
-    let currentIndex = 0;
-
+    let headings = [], currentIndex = 0;
     function loadLanguage(lang) {
-      const file = (lang === 'en') ? 'memoir.md' : 'memoir-he.md';
-      fetch(file)
+      fetch(lang === 'en' ? 'memoir.md' : 'memoir-he.md')
         .then(r => r.text())
         .then(md => {
-          marked.setOptions({ breaks: true });
+          marked.setOptions({ breaks:true });
           contentEl.innerHTML = marked.parse(md);
-          buildTOC();   // rebuild after language switch
-          observeSections();
+          buildTOC(); observeSections();
         });
       document.documentElement.lang = lang;
       mainEl.setAttribute('dir', lang === 'he' ? 'rtl' : 'ltr');
-      heBtn.classList.toggle('active', lang === 'he');
-      enBtn.classList.toggle('active', lang === 'en');
+      [heBtn, enBtn].forEach(btn => btn.classList.toggle('active', btn.id.startsWith(lang)));
     }
-    heBtn.addEventListener('click', () => loadLanguage('he'));
-    enBtn.addEventListener('click', () => loadLanguage('en'));
-    loadLanguage('he');   // default
+    heBtn.onclick = () => loadLanguage('he');
+    enBtn.onclick = () => loadLanguage('en');
+    loadLanguage('he');       // default
 
-    /* -------- build TOC & anchor IDs -------- */
+    /* --- TOC & anchors --- */
     const tocOverlay = document.getElementById('tocOverlay');
     const tocList    = document.getElementById('tocList');
-    function buildTOC() {
+    function buildTOC(){
       tocList.innerHTML = '';
-      headings = Array.from(contentEl.querySelectorAll('h2'));
-      headings.forEach((h, i) => {
-        const id = `section-${i}`;
-        h.id = id;
-        const li = document.createElement('li');
-        li.innerHTML = `<a href="#${id}">${h.textContent}</a>`;
-        tocList.appendChild(li);
+      headings = [...contentEl.querySelectorAll('h2')];
+      headings.forEach((h,i)=>{
+        h.id=`section-${i}`;
+        tocList.insertAdjacentHTML('beforeend',`<li><a href="#${h.id}">${h.textContent}</a></li>`);
       });
     }
 
-    /* -------- Intersection Observer for current section -------- */
-    function observeSections() {
-      const observer = new IntersectionObserver(
-        entries => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) {
-              currentIndex = headings.indexOf(entry.target);
-              updateNavState();
-            }
-          });
-        }, { rootMargin: '-40% 0px -40% 0px' }
-      );
-      headings.forEach(h => observer.observe(h));
+    /* --- section observer --- */
+    function observeSections(){
+      const io=new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){currentIndex=headings.indexOf(e.target);updateNav();}
+        });
+      },{rootMargin:'-45% 0px -45% 0px'});
+      headings.forEach(h=>io.observe(h));
     }
 
-    /* -------- bottom nav actions -------- */
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-    prevBtn.onclick = () => { if (currentIndex > 0) headings[currentIndex-1].scrollIntoView({behavior:'smooth'}); };
-    nextBtn.onclick = () => { if (currentIndex < headings.length-1) headings[currentIndex+1].scrollIntoView({behavior:'smooth'}); };
-
-    /* toc drawer toggle */
-    const tocBtn = document.getElementById('tocBtn');
-    tocBtn.onclick = () => tocOverlay.classList.add('open');
-    tocOverlay.onclick = e => { if (e.target === tocOverlay) tocOverlay.classList.remove('open'); };
-    tocList.addEventListener('click', () => tocOverlay.classList.remove('open'));
-
-    function updateNavState(){
-      prevBtn.disabled = currentIndex === 0;
-      nextBtn.disabled = currentIndex === headings.length-1;
+    /* --- bottom nav actions --- */
+    const prevBtn=document.getElementById('prevBtn');
+    const nextBtn=document.getElementById('nextBtn');
+    prevBtn.onclick=()=>{if(currentIndex>0) headings[currentIndex-1].scrollIntoView({behavior:'smooth'});};
+    nextBtn.onclick=()=>{if(currentIndex<headings.length-1) headings[currentIndex+1].scrollIntoView({behavior:'smooth'});};
+    const tocBtn=document.getElementById('tocBtn');
+    tocBtn.onclick = ()=>tocOverlay.classList.add('open');
+    tocOverlay.onclick = e=>{if(e.target===tocOverlay) tocOverlay.classList.remove('open');};
+    tocList.addEventListener('click',()=>tocOverlay.classList.remove('open'));
+    function updateNav(){
+      prevBtn.disabled=currentIndex===0;
+      nextBtn.disabled=currentIndex===headings.length-1;
     }
 
-    /* -------- scroll progress bar -------- */
-    const root = document.documentElement;
-    window.addEventListener('scroll', () => {
-      const h = document.documentElement.scrollHeight - innerHeight;
-      root.style.setProperty('--scroll', `${(scrollY / h) * 100}%`);
+    /* --- scroll progress bar --- */
+    const root=document.documentElement;
+    window.addEventListener('scroll',()=>{
+      const h=document.documentElement.scrollHeight-innerHeight;
+      root.style.setProperty('--scroll',`${(scrollY/h)*100}%`);
     });
 
-    /* -------- hide / show bottom nav on scroll -------- */
-    const bottomNav = document.getElementById('bottomNav');
-    let lastPos = 0, navTimeout;
-    window.addEventListener('scroll', () => {
-      clearTimeout(navTimeout);
-      const cur = scrollY;
-      if (cur > lastPos + 10) bottomNav.classList.add('hide'); // scrolling down
-      lastPos = cur;
-      navTimeout = setTimeout(() => bottomNav.classList.remove('hide'), 150); // stopped / up
-    }, { passive: true });
+    /* --- hide/show nav on scroll --- */
+    const bottomNav=document.getElementById('bottomNav');
+    let lastPos=0, navT;
+    window.addEventListener('scroll',()=>{
+      const cur=scrollY;
+      if(cur>lastPos+10){bottomNav.classList.add('hide');}
+      lastPos=cur;
+      clearTimeout(navT);
+      navT=setTimeout(()=>bottomNav.classList.remove('hide'),150);
+    },{passive:true});
   </script>
 </body>
 </html>
