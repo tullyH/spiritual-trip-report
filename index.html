@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>מה שראיתי כשקמתי</title>
 
-  <!-- favicon -->
   <link rel="icon"
         href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='0.9em' font-size='90'>🔆</text></svg>" />
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
 </head>
 
@@ -20,17 +19,16 @@
     <a href="#contact" class="lang-switch">Contact</a>
   </div>
 
-  <!-- memoir -->
+  <!-- TOP nav bar (always visible) -->
+  <nav id="topNav" class="top-nav">
+    <button id="prevBtn" aria-label="Previous">⬅︎ Prev</button>
+    <button id="tocBtn"  aria-label="Index">☰ Index</button>
+    <button id="nextBtn" aria-label="Next">Next ➡︎</button>
+  </nav>
+
   <main id="main" class="container" dir="rtl">
     <div id="content">טוען…</div>
   </main>
-
-  <!-- slim bottom nav -->
-  <nav id="bottomNav" class="bottom-nav">
-    <button id="prevBtn" aria-label="Previous">⬆️</button>
-    <button id="tocBtn"  aria-label="Index">☰</button>
-    <button id="nextBtn" aria-label="Next">⬇️</button>
-  </nav>
 
   <!-- TOC drawer -->
   <aside id="tocOverlay" class="toc-overlay">
@@ -42,112 +40,101 @@
     <div class="contact-info">
       <a href="https://www.instagram.com/tully_hoffmann" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/256px-Instagram_logo_2022.svg.png"
-             alt="" class="icon" />Tully Instagram
+             class="icon" alt="">Tully Instagram
       </a>
       <a href="https://www.instagram.com/rawpresence" target="_blank">
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Instagram_logo_2022.svg/256px-Instagram_logo_2022.svg.png"
-             alt="" class="icon" />Raw Presence Lab
+             class="icon" alt="">Raw Presence Lab
       </a>
       <a href="mailto:tullyhoffmann@gmail.com">✉️ Email</a>
     </div>
     <p class="copyright">© 2025 Tully Hoffmann — All rights reserved</p>
   </footer>
 
-  <!-- ===== FIXED SCRIPT: nav + TOC now work every time ===== -->
   <script>
+    /* ---------- core elements ---------- */
     const contentEl = document.getElementById('content');
     const mainEl    = document.getElementById('main');
     const heBtn     = document.getElementById('heBtn');
     const enBtn     = document.getElementById('enBtn');
+    const prevBtn   = document.getElementById('prevBtn');
+    const nextBtn   = document.getElementById('nextBtn');
+    const tocBtn    = document.getElementById('tocBtn');
+    const tocOverlay= document.getElementById('tocOverlay');
+    const tocList   = document.getElementById('tocList');
 
     let headings = [];
     let current  = 0;
-    let observer = null;            // keep the current IntersectionObserver
+    let observer = null;
 
-    /* load markdown */
-    function loadLang(lang){
-      fetch(lang === 'en' ? 'memoir.md' : 'memoir-he.md')
+    /* ---------- load markdown & rebuild nav ---------- */
+    function loadLanguage(lang){
+      fetch(lang==='en' ? 'memoir.md' : 'memoir-he.md')
         .then(r => r.text())
         .then(md => {
           marked.setOptions({ breaks:true });
           contentEl.innerHTML = marked.parse(md);
           buildTOC();
-          observeSections();        // create fresh observer
-          updateNav();              // enable buttons immediately
+          attachObserver();
+          updateButtons();
         });
 
       document.documentElement.lang = lang;
-      mainEl.dir = (lang === 'he') ? 'rtl' : 'ltr';
-      heBtn.classList.toggle('active', lang === 'he');
-      enBtn.classList.toggle('active', lang === 'en');
+      mainEl.dir = (lang==='he') ? 'rtl' : 'ltr';
+      heBtn.classList.toggle('active', lang==='he');
+      enBtn.classList.toggle('active', lang==='en');
     }
-    heBtn.onclick = () => loadLang('he');
-    enBtn.onclick = () => loadLang('en');
-    loadLang('he');                 // initial load
 
-    /* build TOC */
-    const tocOverlay = document.getElementById('tocOverlay');
-    const tocList    = document.getElementById('tocList');
+    heBtn.onclick = () => loadLanguage('he');
+    enBtn.onclick = () => loadLanguage('en');
+    loadLanguage('he');                         // initial
 
+    /* ---------- TOC ---------- */
     function buildTOC(){
       headings = [...contentEl.querySelectorAll('h2')];
       tocList.innerHTML = '';
-      headings.forEach((h,i) => {
-        h.id = `s${i}`;
+      headings.forEach((h,i)=>{
+        h.id = `sec${i}`;
         tocList.insertAdjacentHTML('beforeend',
           `<li><a href="#${h.id}">${h.textContent}</a></li>`);
       });
     }
-    document.getElementById('tocBtn').onclick = () =>
-      tocOverlay.classList.add('open');
+
+    tocBtn.onclick = () => tocOverlay.classList.add('open');
     tocOverlay.onclick = e =>
       (e.target === tocOverlay) && tocOverlay.classList.remove('open');
-    tocList.addEventListener('click', () =>
-      tocOverlay.classList.remove('open'));
+    tocList.addEventListener('click', () => tocOverlay.classList.remove('open'));
 
-    /* prev / next buttons */
-    const prevBtn = document.getElementById('prevBtn');
-    const nextBtn = document.getElementById('nextBtn');
-
+    /* ---------- prev / next ---------- */
     prevBtn.onclick = () =>
-      (current > 0) && headings[current-1].scrollIntoView({ behavior:'smooth' });
+      (current>0)&&headings[current-1].scrollIntoView({behavior:'smooth'});
     nextBtn.onclick = () =>
-      (current < headings.length-1) && headings[current+1].scrollIntoView({ behavior:'smooth' });
+      (current<headings.length-1)&&headings[current+1].scrollIntoView({behavior:'smooth'});
 
-    function updateNav(){
-      prevBtn.disabled = (current === 0);
-      nextBtn.disabled = (current === headings.length - 1);
+    function updateButtons(){
+      prevBtn.disabled = (current===0);
+      nextBtn.disabled = (current===headings.length-1);
     }
 
-    /* observe sections */
-    function observeSections(){
-      if (observer) observer.disconnect();   // kill previous observer
-      observer = new IntersectionObserver(entries => {
-        entries.forEach(e => {
-          if (e.isIntersecting){
+    /* ---------- section observer ---------- */
+    function attachObserver(){
+      if(observer) observer.disconnect();
+      observer = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting){
             current = headings.indexOf(e.target);
-            updateNav();
+            updateButtons();
           }
         });
-      }, { rootMargin:'-45% 0px -45% 0px' });
-      headings.forEach(h => observer.observe(h));
+      }, { threshold:0.3 });         // simple & reliable
+      headings.forEach(h=>observer.observe(h));
     }
 
-    /* hide nav on scroll down */
-    const bar = document.getElementById('bottomNav');
-    let lastY = 0, t;
-    addEventListener('scroll', () => {
-      const y = scrollY;
-      if (y > lastY + 10) bar.classList.add('hide');
-      lastY = y;
-      clearTimeout(t); t = setTimeout(() => bar.classList.remove('hide'), 120);
-    }, { passive:true });
-
-    /* progress bar */
+    /* ---------- progress bar ---------- */
     const root = document.documentElement;
-    addEventListener('scroll', () => {
-      const h = document.documentElement.scrollHeight - innerHeight;
-      root.style.setProperty('--scroll', `${(scrollY / h) * 100}%`);
+    addEventListener('scroll', ()=>{
+      const max = document.documentElement.scrollHeight - innerHeight;
+      root.style.setProperty('--scroll', `${(scrollY/max)*100}%`);
     });
   </script>
 </body>

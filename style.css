@@ -1,105 +1,18 @@
-/* fonts */
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Georgia&display=swap');
+/* top nav */
+.top-nav{
+  position:fixed;top:82px;left:0;right:0;   /* sits under language row */
+  display:flex;justify-content:center;gap:2rem;
+  background:#222;color:#fff;padding:.4rem 0;z-index:998;
+}
+.top-nav button{
+  background:none;border:none;color:inherit;font-size:1rem;cursor:pointer;
+}
+.top-nav button:disabled{opacity:.35;cursor:default}
 
-/* --- basic reset + comfy base size --- */
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:'Georgia',serif;
-  font-size:1.8rem;          /* ← bump to 2rem if you want even larger */
-  line-height:1.75;
-  color:#111;
-  background:#fff;
-  padding-bottom:60px;       /* space for bottom bar */
-}
+/* avoid headers hiding under nav */
+h2{scroll-margin-top:110px;}  /* nav(44)+lang row(66) ≈ 110 */
 
-/* make sure nothing overflows on phones */
-@media (max-width:600px){
-  .container{max-width:100%;}
-  img,video,pre{max-width:100%;}
+/* TOC sheet width tweak for desktop */
+@media (min-width:700px){
+  .toc-sheet{max-width:420px;margin:0 auto;border-radius:12px;}
 }
-
-/* progress strip */
-body::before{
-  content:'';
-  position:fixed;top:0;left:0;
-  height:3px;width:var(--scroll,0);
-  background:#222;z-index:999;
-}
-
-/* language + contact pills */
-.lang-container{
-  display:flex;justify-content:center;gap:1rem;padding:1rem;
-}
-.lang-switch{
-  flex:1;
-  max-width:130px;
-  padding:.5rem 1rem;
-  border:1px solid #ccc;border-radius:8px;
-  background:#f5f5f5;
-  font-size:.9rem;cursor:pointer;
-  text-align:center;text-decoration:none;color:#333;
-}
-.lang-switch.active{font-weight:700;background:#ddd}
-.lang-switch:hover{background:#eaeaea}
-
-/* content wrapper */
-.container{max-width:750px;margin:0 auto;padding-inline:1rem}
-
-/* headings */
-h1,h2,h3{
-  font-family:'Playfair Display',serif;
-  font-weight:800;color:#000;margin:2rem 0 1rem;
-}
-h1{font-size:2.4rem;text-align:center}
-h2{font-size:2rem;text-align:start;font-style:italic}
-h3{font-size:1.4rem}
-
-/* paragraphs */
-p{margin:1.4rem 0;max-width:48ch}
-
-/* footer */
-footer{
-  background:#f5f5f5;
-  padding:2rem 1rem;margin-top:4rem;text-align:center;
-}
-.contact-info{
-  display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;margin-bottom:1rem;
-}
-.contact-info a{
-  display:inline-flex;align-items:center;gap:.4rem;
-  font-weight:600;color:#333;text-decoration:none;
-}
-.contact-info a:hover{color:#0077cc}
-.icon{width:1.6rem;height:1.6rem}
-copyright,.copyright{font-size:.8rem;color:#555}
-
-/* bottom nav */
-.bottom-nav{
-  --h:44px;
-  position:fixed;bottom:0;left:0;right:0;height:var(--h);
-  display:flex;justify-content:center;gap:2.4rem;align-items:center;
-  background:rgba(34,34,34,.9);backdrop-filter:blur(6px);
-  z-index:998;transition:transform .25s,opacity .25s;
-}
-.bottom-nav button{
-  background:none;border:none;color:#fff;
-  font-size:1.4rem;cursor:pointer;
-}
-.bottom-nav button:disabled{opacity:.35;cursor:default}
-.bottom-nav.hide{opacity:0;pointer-events:none;transform:translateY(100%)}
-
-/* TOC drawer */
-.toc-overlay{
-  position:fixed;inset:0;background:rgba(0,0,0,.4);
-  display:none;align-items:flex-end;z-index:1000;
-}
-.toc-overlay.open{display:flex}
-.toc-sheet{
-  width:100%;max-height:70vh;
-  background:#fff;border-radius:12px 12px 0 0;
-  padding:1rem 1rem 2rem;overflow-y:auto;
-}
-.toc-sheet ul{list-style:none;padding:0}
-.toc-sheet li{margin:.9rem 0}
-.toc-sheet a{color:#0077cc;text-decoration:none;font-size:1rem}
-.toc-sheet a:visited{color:#5050aa}
